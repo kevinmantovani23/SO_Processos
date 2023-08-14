@@ -1,0 +1,1 @@
+Codigo feito para verificar o tempo que demora para preencher um vetor de 1000 posições, 10000 posições e 100000 posições.
