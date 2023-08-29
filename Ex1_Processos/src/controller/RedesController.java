@@ -7,14 +7,15 @@ import java.io.InputStreamReader;
 
 public class RedesController {
 
-	private static String os() {
+	private static String os() { // Verifica o sistema operacional
 		String sys = System.getProperty("os.name");
 		return sys;
 	}
 
-	public static void ip() {
+	public static void ip() { // Verifica apenas os adaptadores que contém IPv4, mostrando seu nome e IPv4
 		try {
-			if (verify() == true) {
+			if (verify() == true) {//Para windows
+				@SuppressWarnings("deprecation")
 				Process ip = Runtime.getRuntime().exec("ipconfig");
 				InputStream fluxo = ip.getInputStream();
 				InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -31,7 +32,8 @@ public class RedesController {
 					}
 					linha = buffer.readLine();
 				}
-			} else {
+			} else {//Para Linux
+				@SuppressWarnings("deprecation")
 				Process ip = Runtime.getRuntime().exec("if addr");
 				InputStream fluxo = ip.getInputStream();
 				InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -60,8 +62,8 @@ public class RedesController {
 
 	}
 
-	public static void ping() {
-		if (verify() == true) {
+	public static void ping() {  //Verifica o ping médio na a interação com o site google.com.br
+		if (verify() == true) { //Para windows
 			try {
 				@SuppressWarnings("deprecation")
 				Process ping = Runtime.getRuntime().exec("ping -4 -n 10 www.google.com.br");
@@ -71,9 +73,10 @@ public class RedesController {
 				String linha2 = buffer2.readLine();
 				String media[] = new String[4];
 				while (linha2 != null) {
+					System.out.print(".");
 					if (linha2.contains("Average") || linha2.contains("Média")) {
 						media = linha2.split("=");
-						System.out.println("Media de ping: " + media[3]);
+						System.out.println("\nMedia de ping: " + media[3]);
 						break;
 					} else {
 						linha2 = buffer2.readLine();
@@ -83,7 +86,7 @@ public class RedesController {
 				e.printStackTrace();
 			}
 		} else {
-			try {
+			try {//Para Linux
 				@SuppressWarnings("deprecation")
 				Process ping = Runtime.getRuntime().exec("ping -4 -c 10 www.google.com.br");
 				InputStream fluxo2 = ping.getInputStream();
@@ -92,9 +95,10 @@ public class RedesController {
 				String linha2 = buffer2.readLine();
 				String media[] = new String[7];
 				while (linha2 != null) {
+					System.out.print(".");
 					if (linha2.contains("avg")) {
 						media = linha2.split("/");
-						System.out.println("Media de ping: " + media[4] + "ms");
+						System.out.println("\nMedia de ping: " + media[4] + "ms");
 						break;
 					} else {
 						linha2 = buffer2.readLine();

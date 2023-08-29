@@ -1,7 +1,5 @@
 package view;
 
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
 import controller.RedesController;
@@ -12,12 +10,15 @@ public class Main {
 		StringBuffer caso = new StringBuffer();
 		while (!caso.toString().toLowerCase().equals("sair")) {
 			caso.setLength(0);
-			caso.append(JOptionPane.showInputDialog("Insira 'ip' para descobrir o ip ou 'ping' para descobrir o ping, ou 'sair' para sair"));
+			caso.append(JOptionPane.showInputDialog("Insira 'ip' para descobrir o ip\n"
+													+"Insira 'ping' para descobrir o ping\n"
+													+ "Insira 'sair' para sair"));
 			switch (caso.toString().toLowerCase()) {
 			case "ip":
 				RedesController.ip();
 				break;
 			case "ping":
+				System.out.println("Aguarde enquanto o programa testa o ping.");
 				RedesController.ping();
 				break;
 			case "sair":
