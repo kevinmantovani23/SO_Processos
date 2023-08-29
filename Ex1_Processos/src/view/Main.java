@@ -7,6 +7,7 @@ import controller.RedesController;
 public class Main {
 
 	public static void main(String[] args) {
+		RedesController redes = new RedesController();
 		StringBuffer caso = new StringBuffer();
 		while (!caso.toString().toLowerCase().equals("sair")) {
 			caso.setLength(0);
@@ -15,11 +16,11 @@ public class Main {
 													+ "Insira 'sair' para sair"));
 			switch (caso.toString().toLowerCase()) {
 			case "ip":
-				RedesController.ip();
+				redes.ip();
 				break;
 			case "ping":
 				System.out.println("Aguarde enquanto o programa testa o ping.");
-				RedesController.ping();
+				redes.ping();
 				break;
 			case "sair":
 				break;
